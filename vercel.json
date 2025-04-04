@@ -11,7 +11,7 @@
         "src": "/(.*)",
         "dest": "index.ts",
         "headers": {
-        "Access-Control-Allow-Origin": "https://repos-u69m.vercel.app/",
+        "Access-Control-Allow-Origin": "https://repos-steel.vercel.app",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Allow-Credentials": "true"

@@ -66,7 +66,7 @@ export const createStudent = [
 
       await newStudent.save();
 
-      const verifyURL = `http://localhost:5000/api/user/verify-email/${mailVerificationToken}`;
+      const verifyURL = `https://back-theta-pink.vercel.app/api/user/verify-email/${mailVerificationToken}`;
       //send verification email
       const emailBody = `
         <h2>Verify Your Email!</h2>
@@ -153,7 +153,7 @@ export const loginCtrl = asyncHandler(
       findStudent.mailVerificationToken = mailVerificationToken;
       await findStudent.save();
 
-      const verifyURL = `http://localhost:5000/api/user/verify-email/${mailVerificationToken}`;
+      const verifyURL = `https://back-theta-pink.vercel.app/api/user/verify-email/${mailVerificationToken}`;
       //send verification email
       const emailBody = `
         <h2>Verify Your Email!</h2>
