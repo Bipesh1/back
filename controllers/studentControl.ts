@@ -290,7 +290,6 @@ export const updateStudentByAdmin = [
       }
 
       try {
-        // Fetch the student based on ID
         const student = await Student.findById(id);
         if (!student) {
           res
@@ -306,34 +305,44 @@ export const updateStudentByAdmin = [
 
         const stat = req.body.status;
 
-        if (student.university && Array.isArray(student.university)) {
-          const universityIndex = student.university.findIndex((uni) => {
-            return uni && uni.id && uni.id.toString() === req.body.universityId;
-          });
+        if (req.body.universityId) {
+          if (student.university && Array.isArray(student.university)) {
+            const universityIndex = student.university.findIndex((uni) => {
+              return (
+                uni && uni.id && uni.id.toString() === req.body.universityId
+              );
+            });
 
-          if (universityIndex !== -1) {
-            student.university[universityIndex] = {
-              id: student.university[universityIndex].id,
-              name: student.university[universityIndex].name,
-              status: stat || student.university[universityIndex].status,
-            };
+            if (universityIndex !== -1) {
+              student.university[universityIndex] = {
+                id: student.university[universityIndex].id,
+                name: student.university[universityIndex].name,
+                status: stat || student.university[universityIndex].status,
+              };
+            } else {
+              res.status(404).json({
+                success: false,
+                message: "University not found in student's data",
+              });
+              return;
+            }
           } else {
-            res.status(404).json({
+            res.status(400).json({
               success: false,
-              message: "University not found in student's data",
+              message: "Student university data is invalid or not an array",
             });
             return;
           }
-
-          // Save the updated student
-          const updatedStudent = await student.save();
-
-          res.status(200).json({
-            success: true,
-            message: "Student updated successfully",
-            student: updatedStudent,
-          });
         }
+
+        // Save the updated student
+        const updatedStudent = await student.save();
+
+        res.status(200).json({
+          success: true,
+          message: "Student updated successfully",
+          student: updatedStudent,
+        });
       } catch (error) {
         res.status(500).json({
           success: false,
@@ -344,7 +353,6 @@ export const updateStudentByAdmin = [
     }
   ),
 ];
-
 //Update a student
 export const updateStudent = [
   asyncHandler(
