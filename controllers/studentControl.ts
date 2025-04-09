@@ -12,6 +12,7 @@ import jwt from "jsonwebtoken";
 import sendEmail from "../utils/sendEmail";
 import University from "../models/universityModel";
 import mongoose from "mongoose";
+import Course from "../models/courseModel";
 
 //create student
 export const createStudent = [
@@ -66,7 +67,7 @@ export const createStudent = [
 
       await newStudent.save();
 
-      const verifyURL = `https://back-theta-pink.vercel.app/api/user/verify-email/${mailVerificationToken}`;
+      const verifyURL = `https://api.goingcollege.com/api/user/verify-email/${mailVerificationToken}`;
       //send verification email
       const emailBody = `
         <h2>Verify Your Email!</h2>
@@ -153,7 +154,7 @@ export const loginCtrl = asyncHandler(
       findStudent.mailVerificationToken = mailVerificationToken;
       await findStudent.save();
 
-      const verifyURL = `https://back-theta-pink.vercel.app/api/user/verify-email/${mailVerificationToken}`;
+      const verifyURL = `https://api.goingcollege.com/api/user/verify-email/${mailVerificationToken}`;
       //send verification email
       const emailBody = `
         <h2>Verify Your Email!</h2>
@@ -317,6 +318,7 @@ export const updateStudentByAdmin = [
               student.university[universityIndex] = {
                 id: student.university[universityIndex].id,
                 name: student.university[universityIndex].name,
+                course: student.university[universityIndex].course,
                 status: stat || student.university[universityIndex].status,
               };
             } else {
@@ -353,6 +355,7 @@ export const updateStudentByAdmin = [
     }
   ),
 ];
+
 //Update a student
 export const updateStudent = [
   asyncHandler(
@@ -505,13 +508,12 @@ export const appliedUni = asyncHandler(
       }
 
       const uniId = req.body.university;
+      const course = req.body.course;
       if (!uniId) {
         res
           .status(400)
           .json({ success: false, message: "University ID required" });
-        return;
       }
-
       const apply = await University.findById(uniId);
       if (!apply) {
         res
@@ -540,6 +542,7 @@ export const appliedUni = asyncHandler(
             university: {
               id: apply.id,
               name: apply.name,
+              course: course,
               status: null,
             },
           },

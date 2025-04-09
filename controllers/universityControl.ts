@@ -39,7 +39,7 @@ export const createUniversity = async (req: Request, res: Response) => {
     } = req.body;
 
     const files = (req as MulterRequest).files;
-
+    console.log(req.body)
     if (!files || !files.image || !files.uniLogo) {
       return res
         .status(400)

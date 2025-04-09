@@ -18,6 +18,7 @@ export interface IStudent extends Document {
     {
       id: mongoose.Schema.Types.ObjectId;
       name: string;
+      course: string;
       status: string;
     }
   ];
@@ -90,8 +91,9 @@ const studentSchema = new Schema<IStudent>(
     },
     university: [
       {
-        id: { type: Schema.Types.ObjectId, ref: "University" },
+        id: { type: Schema.Types.ObjectId, ref: "Course" },
         name: { type: String },
+        course: { type: String },
         status: { type: String },
       },
     ],
