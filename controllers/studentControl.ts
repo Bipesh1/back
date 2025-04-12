@@ -43,8 +43,39 @@ export const createStudent = [
     }
 
     try {
-      const { userName, email, password, mobile, category, tests, isVerified } =
-        req.body;
+      const {
+        userName,
+        email,
+        password,
+        mobile,
+        category,
+        tests,
+        isVerified,
+        gender,
+        cityOfBirth,
+        countryOfBirth,
+        dob,
+        nationality,
+        countryOfResidence,
+        address,
+        maritalStatus,
+        workExp,
+        whatsapp,
+        passportNumber,
+        passportCountry,
+        passportExpiry,
+        emergencyName,
+        emergencyRelation,
+        emergencyPhone,
+        emergencyEmail,
+        hsInstitution,
+        hsCountry,
+        hsBoard,
+        hsEndDate,
+        hsGrade,
+        gpa,
+        link,
+      } = req.body;
 
       // Generate email verification token
       const mailVerificationToken = crypto.randomBytes(32).toString("hex");
@@ -61,6 +92,30 @@ export const createStudent = [
         },
         category: category || "none",
         tests: tests || "none",
+        gender: gender || "none",
+        cityOfBirth: cityOfBirth || "none",
+        countryOfBirth: countryOfBirth || "none",
+        dob: dob || "none",
+        nationality: nationality || "none",
+        countryOfResidence: countryOfResidence || "none",
+        address: address || "none",
+        maritalStatus: maritalStatus || "none",
+        workExp: workExp || "none",
+        whatsapp: whatsapp || "none",
+        passportNumber: passportNumber || "none",
+        passportCountry: passportCountry || "none",
+        passportExpiry: passportExpiry || "none",
+        emergencyName: emergencyName || "none",
+        emergencyRelation: emergencyRelation || "none",
+        emergencyPhone: emergencyPhone || "none",
+        emergencyEmail: emergencyEmail || "none",
+        hsInstitution: hsInstitution || "none",
+        hsCountry: hsCountry || "none",
+        hsBoard: hsBoard || "none",
+        hsEndDate: hsEndDate || "none",
+        hsGrade: hsGrade || "none",
+        gpa: gpa || "none",
+        link: link || "none",
         isVerified: false,
         mailVerificationToken,
       });
@@ -390,7 +445,34 @@ export const updateStudent = [
         student.link = req.body.link || student.link;
         student.mobile = req.body.mobile || student.mobile;
         student.tests = req.body.tests || student.tests;
-
+        student.gender = req.body.gender || student.gender;
+        student.cityOfBirth = req.body.cityOfBirth || student.cityOfBirth;
+        student.countryOfBirth =
+          req.body.countryOfBirth || student.countryOfBirth;
+        student.dob = req.body.dob || student.dob;
+        student.nationality = req.body.nationality || student.nationality;
+        student.countryOfResidence =
+          req.body.countryOfResidence || student.countryOfResidence;
+        student.address = req.body.address || student.address;
+        student.whatsapp = req.body.whatsapp || student.whatsapp;
+        student.passportNumber =
+          req.body.passportNumber || student.passportNumber;
+        student.passportCountry =
+          req.body.passportCountry || student.passportCountry;
+        student.passportExpiry =
+          req.body.passportExpiry || student.passportExpiry;
+        student.emergencyName = req.body.emergencyName || student.emergencyName;
+        student.emergencyRelation =
+          req.body.emergencyRelation || student.emergencyRelation;
+        student.emergencyPhone =
+          req.body.emergencyPhone || student.emergencyPhone;
+        student.emergencyEmail =
+          req.body.emergencyEmail || student.emergencyEmail;
+        student.hsInstitution = req.body.hsInstitution || student.hsInstitution;
+        student.hsCountry = req.body.hsCountry || student.hsCountry;
+        student.hsBoard = req.body.hsBoard || student.hsBoard;
+        student.hsEndDate = req.body.hsEndDate || student.hsEndDate;
+        student.hsGrade = req.body.hsGrade || student.hsGrade;
         // Save the updated student
         const updatedStudent = await student.save();
 

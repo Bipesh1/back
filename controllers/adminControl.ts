@@ -262,7 +262,7 @@ export const deleteAdmin = asyncHandler(async (req, res) => {
 
 // Update password with validation
 export const updatePassword = async (req, res) => {
-  const { _id } = req.admin;
+  const { _id } = req.body;
   const { password } = req.body;
   validateMongodbId(_id);
 

@@ -6,14 +6,33 @@ import { ObjectId } from "mongodb";
 export interface IStudent extends Document {
   _id: string;
   userName: string;
+  gender: string;
+  cityOfBirth: string;
+  countryOfBirth: string;
   email: string;
   role: "user";
   password: string;
   mobile: number;
   dob: Date | null;
+  nationality: string;
+  countryOfResidence: string;
+  address: string;
   maritalStatus: string;
   workExp: string;
   tests: string;
+  whatsapp: string;
+  passportNumber: string;
+  passportCountry: string;
+  passportExpiry: string;
+  emergencyName: string;
+  emergencyRelation: string;
+  emergencyPhone: string;
+  emergencyEmail: string;
+  hsInstitution: string;
+  hsCountry: string;
+  hsBoard: string;
+  hsEndDate: string;
+  hsGrade: string;
   university: [
     {
       id: mongoose.Schema.Types.ObjectId;
@@ -46,6 +65,15 @@ const studentSchema = new Schema<IStudent>(
       type: String,
       required: true,
     },
+    gender: {
+      type: String,
+    },
+    cityOfBirth: {
+      type: String,
+    },
+    countryOfBirth: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,
@@ -72,6 +100,15 @@ const studentSchema = new Schema<IStudent>(
     dob: {
       type: Date,
     },
+    nationality: {
+      type: String,
+    },
+    countryOfResidence: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
     maritalStatus: {
       type: String,
     },
@@ -79,6 +116,45 @@ const studentSchema = new Schema<IStudent>(
       type: String,
     },
     tests: {
+      type: String,
+    },
+    whatsapp: {
+      type: String,
+    },
+    passportNumber: {
+      type: String,
+    },
+    passportCountry: {
+      type: String,
+    },
+    passportExpiry: {
+      type: String,
+    },
+    emergencyName: {
+      type: String,
+    },
+    emergencyRelation: {
+      type: String,
+    },
+    emergencyPhone: {
+      type: String,
+    },
+    emergencyEmail: {
+      type: String,
+    },
+    hsInstitution: {
+      type: String,
+    },
+    hsCountry: {
+      type: String,
+    },
+    hsBoard: {
+      type: String,
+    },
+    hsEndDate: {
+      type: String,
+    },
+    hsGrade: {
       type: String,
     },
     isVerified: {
