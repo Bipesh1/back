@@ -39,7 +39,7 @@ export const createUniversity = async (req: Request, res: Response) => {
     } = req.body;
 
     const files = (req as MulterRequest).files;
-    console.log(req.body)
+
     if (!files || !files.image || !files.uniLogo) {
       return res
         .status(400)
@@ -170,6 +170,30 @@ export const getUniversities = async (req: Request, res: Response) => {
 export const getUniversity = async (req: Request, res: Response) => {
   try {
     const university = await University.findById(req.params.id);
+    if (!university) {
+      return res
+        .status(404)
+        .send({ success: false, message: "University not found" });
+    }
+    res.status(200).send({
+      success: true,
+      message: "University fetched successfully",
+      university,
+    });
+  } catch (error) {
+    console.error("Error in getting university:", error);
+    res.status(500).send({
+      success: false,
+      message: "Error in getting university",
+      error: error.message,
+    });
+  }
+};
+
+//get university by slug
+export const getUniversityBySlug = async (req: Request, res: Response) => {
+  try {
+    const university = await University.findOne({ slug: req.params.slug });
     if (!university) {
       return res
         .status(404)

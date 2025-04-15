@@ -7,6 +7,7 @@ interface ICourse extends Document {
   university: {
     id: mongoose.Schema.Types.ObjectId;
     name: string;
+    slug: string;
   };
   qualification: string;
   earliestIntake: string;
@@ -38,6 +39,7 @@ const courseSchema = new mongoose.Schema<ICourse>(
     university: {
       id: { type: Schema.Types.ObjectId, ref: "University", required: true },
       name: { type: String, required: true },
+      slug: { type: String, required: true },
     },
     qualification: {
       type: String,

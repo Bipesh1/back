@@ -18,8 +18,17 @@ export interface IStudent extends Document {
   countryOfResidence: string;
   address: string;
   maritalStatus: string;
-  workExp: string;
-  tests: string;
+  workExpOrg: string;
+  workExpAdd: string;
+  workExpPos: string;
+  workExpFrom: Date | null;
+  workExpTo: Date | null;
+  testName: string;
+  testScore: string;
+  testDate: Date | null;
+  engLangTest: string;
+  engTestScore: string;
+  engTestDate: Date | null;
   whatsapp: string;
   passportNumber: string;
   passportCountry: string;
@@ -28,11 +37,32 @@ export interface IStudent extends Document {
   emergencyRelation: string;
   emergencyPhone: string;
   emergencyEmail: string;
-  hsInstitution: string;
-  hsCountry: string;
-  hsBoard: string;
-  hsEndDate: string;
-  hsGrade: string;
+  schlInstitution: string;
+  schlCountry: string;
+  schlBoard: string;
+  schlEndDate: string;
+  schlGrade: string;
+  hsInstitution: string | null;
+  hsCountry: string | null;
+  hsBoard: string | null;
+  hsStream: string | null;
+  hsStartDate: string | null;
+  hsEndDate: string | null;
+  hsGrade: string | null;
+  gradInstitution: string | null;
+  gradCountry: string | null;
+  gradBoard: string | null;
+  gradStream: string | null;
+  gradStartDate: string | null;
+  gradEndDate: string | null;
+  gradGrade: string | null;
+  postgradInstitution: string | null;
+  postgradCountry: string | null;
+  postgradBoard: string | null;
+  postgradStream: string | null;
+  postgradStartDate: string | null;
+  postgradEndDate: string | null;
+  postgradGrade: string | null;
   university: [
     {
       id: mongoose.Schema.Types.ObjectId;
@@ -49,7 +79,6 @@ export interface IStudent extends Document {
   isVerified: boolean;
   mailVerificationToken: string;
   category: string;
-  gpa: string;
   link: string;
   passwordChangedAt: Date;
   passwordResetToken: string | null;
@@ -91,9 +120,6 @@ const studentSchema = new Schema<IStudent>(
       type: String,
       default: "none",
     },
-    gpa: {
-      type: String,
-    },
     link: {
       type: String,
     },
@@ -112,11 +138,38 @@ const studentSchema = new Schema<IStudent>(
     maritalStatus: {
       type: String,
     },
-    workExp: {
+    workExpOrg: {
       type: String,
     },
-    tests: {
+    workExpAdd: {
       type: String,
+    },
+    workExpPos: {
+      type: String,
+    },
+    workExpFrom: {
+      type: Date,
+    },
+    workExpTo: {
+      type: Date,
+    },
+    engLangTest: {
+      type: String,
+    },
+    engTestScore: {
+      type: String,
+    },
+    engTestDate: {
+      type: Date,
+    },
+    testName: {
+      type: String,
+    },
+    testScore: {
+      type: String,
+    },
+    testDate: {
+      type: Date,
     },
     whatsapp: {
       type: String,
@@ -142,6 +195,21 @@ const studentSchema = new Schema<IStudent>(
     emergencyEmail: {
       type: String,
     },
+    schlInstitution: {
+      type: String,
+    },
+    schlCountry: {
+      type: String,
+    },
+    schlBoard: {
+      type: String,
+    },
+    schlEndDate: {
+      type: String,
+    },
+    schlGrade: {
+      type: String,
+    },
     hsInstitution: {
       type: String,
     },
@@ -151,10 +219,58 @@ const studentSchema = new Schema<IStudent>(
     hsBoard: {
       type: String,
     },
+    hsStream: {
+      type: String,
+    },
+    hsStartDate: {
+      type: String,
+    },
     hsEndDate: {
       type: String,
     },
     hsGrade: {
+      type: String,
+    },
+    gradInstitution: {
+      type: String,
+    },
+    gradCountry: {
+      type: String,
+    },
+    gradBoard: {
+      type: String,
+    },
+    gradStream: {
+      type: String,
+    },
+    gradStartDate: {
+      type: String,
+    },
+    gradEndDate: {
+      type: String,
+    },
+    gradGrade: {
+      type: String,
+    },
+    postgradInstitution: {
+      type: String,
+    },
+    postgradCountry: {
+      type: String,
+    },
+    postgradBoard: {
+      type: String,
+    },
+    postgradStream: {
+      type: String,
+    },
+    postgradStartDate: {
+      type: String,
+    },
+    postgradEndDate: {
+      type: String,
+    },
+    postgradGrade: {
       type: String,
     },
     isVerified: {

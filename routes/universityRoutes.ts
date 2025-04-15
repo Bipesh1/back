@@ -8,6 +8,7 @@ import {
   updateUniversity,
   deleteUniversity,
   getUniversityByCountry,
+  getUniversityBySlug,
 } from "../controllers/universityControl";
 import {
   authMiddleware,
@@ -26,6 +27,7 @@ router.post(
 );
 router.get("/", getUniversities);
 router.get("/:id", getUniversity as any);
+router.get("/by-slug/:slug", getUniversityBySlug as any);
 router.get("/country/:country", getUniversityByCountry as any);
 router.put(
   "/:id",

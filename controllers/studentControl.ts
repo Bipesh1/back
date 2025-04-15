@@ -49,7 +49,9 @@ export const createStudent = [
         password,
         mobile,
         category,
-        tests,
+        testName,
+        testScore,
+        testDate,
         isVerified,
         gender,
         cityOfBirth,
@@ -59,7 +61,11 @@ export const createStudent = [
         countryOfResidence,
         address,
         maritalStatus,
-        workExp,
+        workExpOrg,
+        workExpAdd,
+        workExpPos,
+        workExpFrom,
+        workExpTo,
         whatsapp,
         passportNumber,
         passportCountry,
@@ -73,7 +79,6 @@ export const createStudent = [
         hsBoard,
         hsEndDate,
         hsGrade,
-        gpa,
         link,
       } = req.body;
 
@@ -91,7 +96,9 @@ export const createStudent = [
           name: null,
         },
         category: category || "none",
-        tests: tests || "none",
+        testName: testName || "none",
+        testScore: testScore || "none",
+        testDate: testDate,
         gender: gender || "none",
         cityOfBirth: cityOfBirth || "none",
         countryOfBirth: countryOfBirth || "none",
@@ -100,7 +107,11 @@ export const createStudent = [
         countryOfResidence: countryOfResidence || "none",
         address: address || "none",
         maritalStatus: maritalStatus || "none",
-        workExp: workExp || "none",
+        workExpOrg: workExpOrg || "none",
+        workExpAdd: workExpAdd || "none",
+        workExpPos: workExpPos || "none",
+        workExpFrom: workExpFrom,
+        workExpTo: workExpTo,
         whatsapp: whatsapp || "none",
         passportNumber: passportNumber || "none",
         passportCountry: passportCountry || "none",
@@ -114,7 +125,6 @@ export const createStudent = [
         hsBoard: hsBoard || "none",
         hsEndDate: hsEndDate || "none",
         hsGrade: hsGrade || "none",
-        gpa: gpa || "none",
         link: link || "none",
         isVerified: false,
         mailVerificationToken,
@@ -438,13 +448,21 @@ export const updateStudent = [
         }
 
         // Update student details if provided
-        student.workExp = req.body.workExp || student.workExp;
+        student.workExpTo = req.body.workExpTo || student.workExpTo;
+        student.workExpFrom = req.body.workExpFrom || student.workExpFrom;
+        student.workExpPos = req.body.workExpPos || student.workExpPos;
+        student.workExpAdd = req.body.workExpAdd || student.workExpAdd;
+        student.workExpOrg = req.body.workExpOrg || student.workExpOrg;
         student.maritalStatus = req.body.maritalStatus || student.maritalStatus;
         student.dob = req.body.dob || student.dob;
-        student.gpa = req.body.gpa || student.gpa;
+        student.engLangTest = req.body.engLangTest || student.engLangTest;
+        student.engTestScore = req.body.engTestScore || student.engTestScore;
+        student.engTestDate = req.body.engTestDate || student.engTestDate;
         student.link = req.body.link || student.link;
         student.mobile = req.body.mobile || student.mobile;
-        student.tests = req.body.tests || student.tests;
+        student.testName = req.body.testName || student.testName;
+        student.testScore = req.body.testScore || student.testScore;
+        student.testDate = req.body.testDate || student.testDate;
         student.gender = req.body.gender || student.gender;
         student.cityOfBirth = req.body.cityOfBirth || student.cityOfBirth;
         student.countryOfBirth =
@@ -468,11 +486,39 @@ export const updateStudent = [
           req.body.emergencyPhone || student.emergencyPhone;
         student.emergencyEmail =
           req.body.emergencyEmail || student.emergencyEmail;
+        student.schlInstitution =
+          req.body.schlInstitution || student.schlInstitution;
+        student.schlCountry = req.body.schlCountry || student.schlCountry;
+        student.schlBoard = req.body.schlBoard || student.schlBoard;
+        student.schlEndDate = req.body.schlEndDate || student.schlEndDate;
+        student.schlGrade = req.body.schlGrade || student.schlGrade;
         student.hsInstitution = req.body.hsInstitution || student.hsInstitution;
         student.hsCountry = req.body.hsCountry || student.hsCountry;
         student.hsBoard = req.body.hsBoard || student.hsBoard;
+        student.hsStream = req.body.hsStream || student.hsStream;
         student.hsEndDate = req.body.hsEndDate || student.hsEndDate;
+        student.hsStartDate = req.body.hsStartDate || student.hsStartDate;
         student.hsGrade = req.body.hsGrade || student.hsGrade;
+        student.gradInstitution =
+          req.body.gradInstitution || student.gradInstitution;
+        student.gradCountry = req.body.gradCountry || student.gradCountry;
+        student.gradBoard = req.body.gradBoard || student.gradBoard;
+        student.gradStream = req.body.gradStream || student.gradStream;
+        student.gradEndDate = req.body.gradEndDate || student.gradEndDate;
+        student.gradStartDate = req.body.gradStartDate || student.gradStartDate;
+        student.gradGrade = req.body.gradGrade || student.gradGrade;
+        student.postgradInstitution =
+          req.body.postgradInstitution || student.postgradInstitution;
+        student.postgradCountry =
+          req.body.postgradCountry || student.postgradCountry;
+        student.postgradBoard = req.body.postgradBoard || student.postgradBoard;
+        student.postgradStream =
+          req.body.postgradStream || student.postgradStream;
+        student.postgradEndDate =
+          req.body.postgradEndDate || student.postgradEndDate;
+        student.postgradStartDate =
+          req.body.postgradStartDate || student.postgradStartDate;
+        student.postgradGrade = req.body.postgradGrade || student.postgradGrade;
         // Save the updated student
         const updatedStudent = await student.save();
 

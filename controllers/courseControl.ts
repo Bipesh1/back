@@ -36,7 +36,11 @@ export const createCourse = async (req: Request, res: Response) => {
       title,
       priority,
       category,
-      university: { id: university._id, name: university.name },
+      university: {
+        id: university._id,
+        name: university.name,
+        slug: university.slug,
+      },
       qualification,
       earliestIntake,
       deadline,
@@ -90,6 +94,30 @@ export const getCourses = async (req: Request, res: Response) => {
 export const getCourse = async (req: Request, res: Response) => {
   try {
     const course = await Course.findById(req.params.id);
+    if (!course) {
+      return res
+        .status(404)
+        .send({ success: false, message: "Course not found" });
+    }
+    res.status(200).send({
+      success: true,
+      message: "Course fetched successfully",
+      course,
+    });
+  } catch (error) {
+    console.error("Error in getting course:", error);
+    res.status(500).send({
+      success: false,
+      message: "Error in getting course",
+      error: error.message,
+    });
+  }
+};
+
+//get course by slug
+export const getCourseBySlug = async (req: Request, res: Response) => {
+  try {
+    const course = await Course.findOne({ slug: req.params.slug });
     if (!course) {
       return res
         .status(404)
@@ -206,7 +234,8 @@ export const updateCourse = async (req: Request, res: Response) => {
       }
       course.university = {
         id: university.id,
-        name: university.name, // Auto-populate name
+        name: university.name,
+        slug: university.slug,
       };
     }
     if (priority) course.priority = priority;
