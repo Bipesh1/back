@@ -1,3 +1,4 @@
+
 import Blog from "../models/blogModel";
 import { Request, Response } from "express";
 import path from "path";
@@ -11,6 +12,7 @@ interface MulterRequest extends Request {
 interface RequestWithParams extends Request {
   params: {
     id: string;
+    slug: string;
   };
 }
 
@@ -110,6 +112,31 @@ export const getBlogs = async (req: Request, res: Response) => {
 export const getBlog = async (req: RequestWithParams, res: Response) => {
   try {
     const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).send({
+        success: false,
+        message: "Blog not found",
+      });
+    }
+    res.status(200).send({
+      success: true,
+      message: "Blog fetched successfully",
+      blog,
+    });
+  } catch (error) {
+    console.error("Error getting blog:", error);
+    res.status(500).send({
+      success: false,
+      message: "Error getting blog",
+      error: error.message,
+    });
+  }
+};
+
+//Get blog by slug
+export const getBlogBySlug = async (req: RequestWithParams, res: Response) => {
+  try {
+    const blog = await Blog.findOne({ slug: req.params.slug });
     if (!blog) {
       return res.status(404).send({
         success: false,

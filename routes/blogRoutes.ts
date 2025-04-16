@@ -1,3 +1,4 @@
+
 import express from "express";
 const router = express.Router();
 import upload from "../config/multerConfig";
@@ -7,6 +8,7 @@ import {
   getBlog,
   updateBlog,
   deleteBlog,
+  getBlogBySlug,
 } from "../controllers/blogControl";
 import {
   authMiddleware,
@@ -22,6 +24,7 @@ router.post(
 );
 router.get("/", getBlogs);
 router.get("/:id", getBlog as any);
+router.get("/by-slug/:slug", getBlogBySlug as any);
 router.put(
   "/:id",
   authMiddleware,
